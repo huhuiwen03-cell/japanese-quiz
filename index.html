@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>日语 N1 核心词汇练习</title>
+<style>
+  :root {
+    --bg: #eef1f7;
+    --phone-shell: #111319;
+    --surface: #f4f6fb;
+    --card: rgba(255, 255, 255, 0.72);
+    --text: #1b2230;
+    --muted: #6a7288;
+    --accent: #2d63ff;
+    --accent-soft: #e6ecff;
+    --ok: #17b26a;
+    --err: #f04438;
+    --line: #e7eaf3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 20% 12%, #fbfcff 0%, #edf2ff 35%, transparent 60%),
+      radial-gradient(circle at 85% 75%, #dbe8ff 0%, #eaf0fb 36%, transparent 65%),
+      linear-gradient(145deg, #eef2fb 0%, #e6ebf5 100%);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    padding: 20px;
+  }
+  .phone {
+    width: min(390px, 100%);
+    background: var(--phone-shell);
+    border-radius: 52px;
+    padding: 10px;
+    box-shadow: 0 30px 50px rgba(16, 22, 35, 0.35);
+  }
+  .screen {
+    background: var(--surface);
+    border-radius: 42px;
+    overflow: hidden;
+    min-height: 790px;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .island {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125px;
+    height: 34px;
+    background: #0e1118;
+    border-radius: 20px;
+    z-index: 5;
+  }
+  .app {
+    padding: 54px 18px 18px;
+  }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  .score {
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(226, 232, 247, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 999px;
+    padding: 6px 10px;
+  }
+  .mode-pill {
+    font-size: 11px;
+    color: #4d5b7f;
+    background: #edf1ff;
+    border: 1px solid #dce5ff;
+    border-radius: 999px;
+    padding: 4px 8px;
+    margin-right: 6px;
+  }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .icon-btn {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 6px 8px;
+    cursor: pointer;
+  }
+  .progress-wrap {
+    height: 8px;
+    border-radius: 999px;
+    background: #dce3f5;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #5f83ff, #3d6bff);
+    transition: width 0.25s ease;
+  }
+  .card {
+    margin-top: 14px;
+    background: var(--card);
+    border: 1px solid rgba(228, 235, 248, 0.9);
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(25, 39, 73, 0.08);
+    backdrop-filter: blur(18px);
+  }
+  .cover {
+    display: grid;
+    gap: 14px;
+  }
+  .cover-hero {
+    background: linear-gradient(135deg, #3e6eff 0%, #2d63ff 45%, #7f97ff 100%);
+    border-radius: 20px;
+    color: #fff;
+    padding: 18px 16px;
+    box-shadow: 0 16px 30px rgba(45, 99, 255, 0.32);
+  }
+  .cover-hero h2 {
+    margin: 0 0 8px;
+    font-size: 22px;
+  }
+  .cover-hero p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.92;
+    line-height: 1.5;
+  }
+  .menu-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px;
+  }
+  .menu-card h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+  }
+  .menu-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .menu-actions {
+    margin-top: 6px;
+    display: grid;
+    gap: 10px;
+  }
+  .secondary-btn {
+    border: 1px solid #cfd8f6;
+    border-radius: 16px;
+    padding: 12px 14px;
+    background: #fff;
+    color: #3556cb;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .empty-note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .hidden {
+    display: none !important;
+  }
+  .question-index {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .question {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .options {
+    display: grid;
+    gap: 10px;
+  }
+  .option {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--text);
+    padding: 14px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+  }
+  .option:active {
+    transform: scale(0.99);
+  }
+  .option:hover {
+    box-shadow: 0 8px 18px rgba(44, 67, 124, 0.1);
+    border-color: #d6dff8;
+  }
+  .option.disabled {
+    pointer-events: none;
+  }
+  .option-index {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    display: inline-grid;
+    place-items: center;
+    font-size: 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .option.correct {
+    border-color: #a8eccb;
+    background: #ecfbf3;
+  }
+  .option.wrong {
+    border-color: #ffc7c3;
+    background: #fff1f0;
+  }
+  .analysis {
+    display: none;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  .analysis h4 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .analysis-item {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eef1f8;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .analysis-item:last-child {
+    border-bottom: none;
+  }
+  .analysis-item strong {
+    color: #252f46;
+  }
+  .analysis-item em {
+    color: var(--accent);
+    font-style: normal;
+    margin-left: 6px;
+  }
+  .actions {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  #nextBtn, #restartBtn {
+    border: none;
+    border-radius: 16px;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    background: linear-gradient(130deg, #5f83ff, #3d6bff);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 18px rgba(61, 107, 255, 0.28);
+  }
+  #nextBtn:disabled {
+    background: #c4cbde;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .result {
+    text-align: center;
+    padding: 12px 4px 4px;
+  }
+  .result h2 {
+    margin: 6px 0 10px;
+  }
+  .result p {
+    color: var(--muted);
+    margin: 6px 0;
+  }
+  .shake {
+    animation: shake 0.35s ease;
+  }
+  @keyframes shake {
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-3px); }
+  }
+</style>
+</head>
+<body>
+  <div class="phone">
+    <div class="screen">
+      <div class="island"></div>
+      <div class="app">
+        <div class="topbar">
+          <div class="title">日语 N1 核心词汇</div>
+          <div class="topbar-right">
+            <span class="mode-pill" id="modeLabel">待选择</span>
+            <div class="score" id="scoreLabel">0 / 20</div>
+            <button class="icon-btn hidden" id="homeBtn" type="button">封面</button>
+          </div>
+        </div>
+        <div class="progress-wrap"><div class="progress-bar" id="progress"></div></div>
+        <div class="card" id="content">
+          <div class="question">加载中...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const QUIZ_SIZE = 20;
+const LABELS = { easy: "基础", mid: "进阶", hard: "高阶" };
+const PLAN = { easy: 8, mid: 7, hard: 5 }; // 共20题，难度递进
+const WRONG_KEY = "jp_n1_wrong_book_v1";
+
+const sample = (arr, size) => {
+  const copied = [...arr];
+  for (let i = copied.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copied[i], copied[j]] = [copied[j], copied[i]];
+  }
+  return copied.slice(0, Math.min(size, copied.length));
+};
+
+let vocabPool = [];
+let BANK = [];
+
+function makeOptions(entry) {
+  const distractors = sample(vocabPool.filter((v) => v.id !== entry.id), 3).map((v) => ({
+    text: v.meaning,
+    reading: v.reading,
+    reason: `这是「${v.word}」的含义。`
+  }));
+  const correct = {
+    text: entry.meaning,
+    reading: entry.reading,
+    reason: `「${entry.word}」读作「${entry.reading}」，意思是「${entry.meaning}」。`
+  };
+  const mixed = sample([correct, ...distractors], 4);
+  const answer = mixed.findIndex((item) => item.text === correct.text && item.reading === correct.reading);
+  return { options: mixed, answer };
+}
+
+function buildBankFromVocab(vocabList) {
+  vocabPool = vocabList.map((item, index) => ({
+    id: item.id || `${item.word}-${index}`,
+    word: item.word,
+    reading: item.reading,
+    meaning: item.meaning,
+    difficulty: item.difficulty || (index < 20 ? "easy" : index < 37 ? "mid" : "hard")
+  }));
+  BANK = vocabPool.map((entry) => {
+    const { options, answer } = makeOptions(entry);
+    return {
+      id: entry.id,
+      difficulty: entry.difficulty,
+      question: `「${entry.word}」的含义最接近哪一项？`,
+      options,
+      answer
+    };
+  });
+}
+
+async function loadVocabJSON() {
+  const res = await fetch("./vocab.json");
+  if (!res.ok) throw new Error("题库加载失败");
+  const list = await res.json();
+  if (!Array.isArray(list) || list.length < 8) throw new Error("题库格式不正确");
+  return list;
+}
+
+function buildQuizSet() {
+  const grouped = {
+    easy: BANK.filter((q) => q.difficulty === "easy"),
+    mid: BANK.filter((q) => q.difficulty === "mid"),
+    hard: BANK.filter((q) => q.difficulty === "hard")
+  };
+  const result = [
+    ...sample(grouped.easy, PLAN.easy),
+    ...sample(grouped.mid, PLAN.mid),
+    ...sample(grouped.hard, PLAN.hard)
+  ];
+  return result.slice(0, QUIZ_SIZE);
+}
+
+let data = [];
+
+const state = {
+  idx: 0,
+  score: 0,
+  locked: false,
+  mode: "normal"
+};
+
+const els = {
+  questionIndex: null,
+  question: null,
+  options: null,
+  analysis: null,
+  analysisList: null,
+  nextBtn: null,
+  progress: document.getElementById("progress"),
+  scoreLabel: document.getElementById("scoreLabel"),
+  content: document.getElementById("content"),
+  modeLabel: document.getElementById("modeLabel"),
+  homeBtn: document.getElementById("homeBtn")
+};
+
+function renderQuestionCard() {
+  els.content.innerHTML = `
+    <div class="question-index" id="questionIndex"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div class="analysis" id="analysis">
+      <h4>选项读音与解析</h4>
+      <div id="analysisList"></div>
+    </div>
+    <div class="actions">
+      <button id="nextBtn" disabled>下一题</button>
+    </div>
+  `;
+  els.questionIndex = document.getElementById("questionIndex");
+  els.question = document.getElementById("question");
+  els.options = document.getElementById("options");
+  els.analysis = document.getElementById("analysis");
+  els.analysisList = document.getElementById("analysisList");
+  els.nextBtn = document.getElementById("nextBtn");
+  els.nextBtn.onclick = next;
+}
+
+const readWrongBook = () => {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(WRONG_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveWrongBook = (ids) => localStorage.setItem(WRONG_KEY, JSON.stringify([...new Set(ids)]));
+
+function addWrongQuestion(question) {
+  const wrongIds = readWrongBook();
+  wrongIds.push(question.question);
+  saveWrongBook(wrongIds);
+}
+
+function buildWrongQuizSet() {
+  const wrongIds = readWrongBook();
+  const pool = BANK.filter((q) => wrongIds.includes(q.question));
+  return sample(pool, QUIZ_SIZE);
+}
+
+function updateHeader() {
+  const modeText = state.mode === "wrong" ? "错题模式" : "普通模式";
+  els.modeLabel.textContent = modeText;
+  els.homeBtn.classList.toggle("hidden", state.mode === "cover");
+}
+
+function renderCover() {
+  state.mode = "cover";
+  updateHeader();
+  const wrongCount = readWrongBook().length;
+  els.progress.style.width = "0%";
+  els.scoreLabel.textContent = "0 / 0";
+  els.content.innerHTML = `
+    <div class="cover">
+      <div class="cover-hero">
+        <h2>日语词汇练习</h2>
+        <p>随机抽题 + 难度递进。你可以从普通模式开始，或直接进入错题本复习。</p>
+      </div>
+      <div class="menu-card">
+        <h3>普通模式</h3>
+        <p>每次随机 20 题，按基础 → 进阶 → 高阶变化。</p>
+      </div>
+      <div class="menu-card">
+        <h3>错题模式</h3>
+        <p>仅抽取你答错过的题，集中补弱。</p>
+        <p class="empty-note">当前错题本：${wrongCount} 题</p>
+      </div>
+      <div class="menu-actions">
+        <button id="startNormalBtn">开始普通模式</button>
+        <button id="startWrongBtn" class="secondary-btn">进入错题模式</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("startNormalBtn").onclick = () => startGame("normal");
+  document.getElementById("startWrongBtn").onclick = () => startGame("wrong");
+}
+
+function startGame(mode) {
+  state.idx = 0;
+  state.score = 0;
+  state.locked = false;
+  state.mode = mode;
+  data = mode === "wrong" ? buildWrongQuizSet() : buildQuizSet();
+
+  if (mode === "wrong" && data.length === 0) {
+    alert("错题本目前为空，请先在普通模式做题。");
+    renderCover();
+    return;
+  }
+  updateHeader();
+  renderQuestionCard();
+  render();
+}
+
+function showLoadError(message) {
+  els.modeLabel.textContent = "加载失败";
+  els.homeBtn.classList.add("hidden");
+  els.scoreLabel.textContent = "0 / 0";
+  els.progress.style.width = "0%";
+  els.content.innerHTML = `
+    <div class="result">
+      <h2>题库加载失败</h2>
+      <p>${message}</p>
+      <p>请确认 \`日语app.html\` 与 \`vocab.json\` 在同一文件夹。</p>
+    </div>
+  `;
+}
+
+function render() {
+  const total = data.length;
+  if (state.idx >= total) {
+    renderResult();
+    return;
+  }
+
+  const q = data[state.idx];
+  const level = LABELS[q.difficulty] || "综合";
+  els.questionIndex.textContent = `第 ${state.idx + 1} / ${total} 题 · ${level}`;
+  els.question.textContent = q.question;
+  els.options.innerHTML = "";
+  els.analysis.style.display = "none";
+  els.nextBtn.disabled = true;
+  els.progress.style.width = `${(state.idx / total) * 100}%`;
+  els.scoreLabel.textContent = `${state.score} / ${total}`;
+
+  q.options.forEach((op, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "option";
+    btn.innerHTML = `<span>${op.text}</span><span class="option-index">${i + 1}</span>`;
+    btn.onclick = () => handleSelect(i);
+    els.options.appendChild(btn);
+  });
+}
+
+function handleSelect(i) {
+  if (state.locked) return;
+  state.locked = true;
+
+  const q = data[state.idx];
+  const options = Array.from(els.options.children);
+  options.forEach((el, idx) => {
+    el.classList.add("disabled");
+    if (idx === q.answer) el.classList.add("correct");
+    if (idx === i && i !== q.answer) el.classList.add("wrong");
+  });
+
+  if (i === q.answer) {
+    state.score += 1;
+  } else {
+    addWrongQuestion(q);
+    els.content.classList.add("shake");
+    setTimeout(() => els.content.classList.remove("shake"), 350);
+  }
+
+  showAnalysis(q);
+  els.nextBtn.disabled = false;
+  els.progress.style.width = `${((state.idx + 1) / data.length) * 100}%`;
+  els.scoreLabel.textContent = `${state.score} / ${data.length}`;
+}
+
+function showAnalysis(q) {
+  els.analysisList.innerHTML = "";
+  q.options.forEach((op, idx) => {
+    const row = document.createElement("div");
+    row.className = "analysis-item";
+    row.innerHTML = `<strong>${idx + 1}. ${op.text}</strong><em>${op.reading}</em><br>${op.reason}`;
+    els.analysisList.appendChild(row);
+  });
+  els.analysis.style.display = "block";
+}
+
+function renderResult() {
+  const message = state.mode === "wrong" ? "错题复习完成，继续保持。" : "继续加油，N1 词汇会越记越稳。";
+  els.content.innerHTML = `
+    <div class="result">
+      <h2>练习完成</h2>
+      <p>得分：${state.score} / ${data.length}</p>
+      <p>${message}</p>
+      <div class="actions" style="justify-content:center; margin-top: 16px;">
+        <button id="restartBtn">再来一轮</button>
+        <button id="backCoverBtn" class="secondary-btn" style="margin-left: 8px;">返回封面</button>
+      </div>
+    </div>
+  `;
+  document.getElementById("restartBtn").onclick = reset;
+  document.getElementById("backCoverBtn").onclick = renderCover;
+  els.progress.style.width = "100%";
+  els.scoreLabel.textContent = `${state.score} / ${data.length}`;
+}
+
+function next() {
+  if (state.idx < data.length) {
+    state.idx += 1;
+    state.locked = false;
+    render();
+  }
+}
+
+function reset() {
+  startGame(state.mode === "wrong" ? "wrong" : "normal");
+}
+
+els.homeBtn.onclick = renderCover;
+loadVocabJSON()
+  .then((list) => {
+    buildBankFromVocab(list);
+    data = buildQuizSet();
+    renderCover();
+  })
+  .catch(() => {
+    showLoadError("当前环境无法读取 JSON（通常是直接双击打开造成）。建议用本地服务器访问。");
+  });
+</script>
+</body>
+</html>
