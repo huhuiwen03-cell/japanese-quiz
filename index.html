@@ -167,6 +167,17 @@
     display: grid;
     gap: 10px;
   }
+  .primary-btn {
+    border: 1px solid rgba(45, 99, 255, 0.15);
+    border-radius: 16px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #3f6fff 0%, #2d63ff 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(45, 99, 255, 0.3);
+  }
   .secondary-btn {
     border: 1px solid #cfd8f6;
     border-radius: 16px;
@@ -176,6 +187,29 @@
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
+  }
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease;
+    will-change: transform;
+  }
+  .menu-btn .btn-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+  .menu-btn:active {
+    transform: scale(0.97);
+  }
+  .primary-btn.menu-btn:active {
+    filter: brightness(0.95);
+    box-shadow: 0 6px 12px rgba(45, 99, 255, 0.24);
+  }
+  .secondary-btn.menu-btn:active {
+    filter: brightness(0.97);
+    box-shadow: 0 5px 10px rgba(44, 67, 124, 0.12);
   }
   .empty-note {
     color: var(--muted);
@@ -507,8 +541,8 @@ function renderCover() {
         <p class="empty-note">当前错题本：${wrongCount} 题</p>
       </div>
       <div class="menu-actions">
-        <button id="startNormalBtn">开始普通模式</button>
-        <button id="startWrongBtn" class="secondary-btn">进入错题模式</button>
+        <button id="startNormalBtn" class="primary-btn menu-btn"><span class="btn-icon">🎯</span><span>开始普通模式</span></button>
+        <button id="startWrongBtn" class="secondary-btn menu-btn"><span class="btn-icon">📝</span><span>进入错题模式</span></button>
       </div>
     </div>
   `;
